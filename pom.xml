@@ -39,6 +39,8 @@
             <groupId>com.alimama.tblm</groupId>
             <artifactId>sdk-java</artifactId>
             <version>ysdd_27528983</version>
+           <!-- <scope>system</scope>
+            <systemPath>D:/maven/repository/taobao-sdk-java-auto.jar</systemPath>-->
         </dependency>
 
         <dependency>

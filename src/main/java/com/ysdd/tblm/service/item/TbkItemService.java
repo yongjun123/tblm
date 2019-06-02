@@ -6,6 +6,7 @@ import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.TbkItemGetRequest;
 import com.taobao.api.response.TbkItemGetResponse;
 import com.ysdd.tblm.config.TbkConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,6 +20,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class TbkItemService {
 
+    @Value("${TAOBAO.APPLICATION.APPKEY}")
+    private String appkey;
+    @Value("${TAOBAO.APPLICATION.SECRET}")
+    private String secret;
+    @Value("${TAOBAO.APPLICATION.URL}")
+    private String url;
     /**
      * 商品查询示例
      *
@@ -27,11 +34,12 @@ public class TbkItemService {
      */
     public TbkItemGetResponse getExample() throws ApiException {
         /*正式环境中应使用单例模式减少资源占用*/
-        TaobaoClient client = new DefaultTaobaoClient(TbkConfig.SERVER, TbkConfig.APPKEY, TbkConfig.SECRET);
+        TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
         TbkItemGetRequest req = new TbkItemGetRequest();
         req.setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
         req.setQ("女装");
         req.setCat("16,18");
+
 //        req.setItemloc("杭州");
 //        req.setSort("tk_rate_des");
 //        req.setIsTmall(false);

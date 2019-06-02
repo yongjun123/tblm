@@ -3,7 +3,9 @@ package com.ysdd.tblm.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.taobao.api.ApiException;
 import com.taobao.api.response.TbkItemGetResponse;
+import com.ysdd.tblm.common.web.AjaxResult;
 import com.ysdd.tblm.service.item.TbkItemService;
+import com.ysdd.tblm.taobaoAppliction.TBKApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +36,8 @@ public class TbkItemController {
      */
     @ResponseBody
     @RequestMapping("/getExample")
-    private String getExample() throws ApiException {
-        TbkItemGetResponse example = tbkItemService.getExample();
-        return JSONObject.toJSONString(example);
+    private AjaxResult getExample() throws ApiException {
+
+        return AjaxResult.success(TBKApi.ItemGet.getItemInfo("11","A"));
     }
 }
