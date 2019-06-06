@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.taobao.api.ApiException;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import com.ysdd.tblm.service.dg.TbkDgMaterialOptionalService;
-import com.ysdd.tblm.taobaoAppliction.TBKApi;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,12 +20,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/tbk/dg")
+@Api("淘宝客导购类API")
 public class TbkDgController {
     /**
      * 导购类服务
      */
-    @Autowired
-    TbkDgMaterialOptionalService dgMaterialOptionalService;
+    private final TbkDgMaterialOptionalService dgMaterialOptionalService;
+
+    public TbkDgController(TbkDgMaterialOptionalService dgMaterialOptionalService) {
+        this.dgMaterialOptionalService = dgMaterialOptionalService;
+    }
 
     /**
      * 返回物料搜索样例数据
@@ -34,6 +38,7 @@ public class TbkDgController {
      */
     @ResponseBody
     @RequestMapping("/getExample")
+    @ApiOperation(value = "获取物料搜索的样例数据")
     public String getExample() throws ApiException {
         TbkDgMaterialOptionalResponse example = dgMaterialOptionalService.getExample();
         return JSONObject.toJSONString(example);
