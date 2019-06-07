@@ -5,7 +5,6 @@ import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.TbkItemGetRequest;
 import com.taobao.api.response.TbkItemGetResponse;
-import com.ysdd.tblm.config.TbkConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +25,7 @@ public class TbkItemService {
     private String secret;
     @Value("${TAOBAO.APPLICATION.URL}")
     private String url;
+
     /**
      * 商品查询示例
      *
@@ -51,8 +51,6 @@ public class TbkItemService {
 //        req.setPlatform(1L);
 //        req.setPageNo(123L);
 //        req.setPageSize(20L);
-        TbkItemGetResponse rsp = client.execute(req);
-        System.out.println(rsp.getBody());
-        return rsp;
+        return client.execute(req);
     }
 }

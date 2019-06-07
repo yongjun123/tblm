@@ -6,6 +6,7 @@ import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.TbkDgMaterialOptionalRequest;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import com.ysdd.tblm.config.TbkConfig;
+import com.ysdd.tblm.util.CopyUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,7 +26,7 @@ public class TbkDgMaterialOptionalService {
      * @return materialOptionalResponse
      * @throws ApiException exception
      */
-    public TbkDgMaterialOptionalResponse getExample() throws ApiException {
+    public TbkDgMaterialOptionalResponse getExample(TbkDgMaterialOptionalRequest request) throws ApiException {
         TaobaoClient client = new DefaultTaobaoClient(TbkConfig.SERVER, TbkConfig.APPKEY, TbkConfig.SECRET);
         TbkDgMaterialOptionalRequest req = new TbkDgMaterialOptionalRequest();
 //        req.setStartDsr(10L);
@@ -57,9 +58,8 @@ public class TbkDgMaterialOptionalService {
         req.setDeviceEncrypt("MD5");
         req.setDeviceValue("xxx");
         req.setDeviceType("IMEI");*/
-        TbkDgMaterialOptionalResponse rsp = client.execute(req);
-        System.out.println(rsp.getBody());
-        return rsp;
+        CopyUtils.copyProperties(request, req);
+        return client.execute(req);
     }
 
 }

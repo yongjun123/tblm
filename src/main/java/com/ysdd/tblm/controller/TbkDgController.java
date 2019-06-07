@@ -2,6 +2,7 @@ package com.ysdd.tblm.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.taobao.api.ApiException;
+import com.taobao.api.request.TbkDgMaterialOptionalRequest;
 import com.taobao.api.response.TbkDgMaterialOptionalResponse;
 import com.ysdd.tblm.service.dg.TbkDgMaterialOptionalService;
 import io.swagger.annotations.Api;
@@ -39,8 +40,8 @@ public class TbkDgController {
     @ResponseBody
     @RequestMapping("/getExample")
     @ApiOperation(value = "获取物料搜索的样例数据")
-    public String getExample() throws ApiException {
-        TbkDgMaterialOptionalResponse example = dgMaterialOptionalService.getExample();
+    public String getExample(TbkDgMaterialOptionalRequest request) throws ApiException {
+        TbkDgMaterialOptionalResponse example = dgMaterialOptionalService.getExample(request);
         return JSONObject.toJSONString(example);
     }
 }
